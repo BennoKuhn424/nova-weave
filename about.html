@@ -16,7 +16,12 @@
                     <span class="tagline">DESIGN · STRATEGY · GROWTH</span>
                 </div>
             </div>
-            <ul class="nav-menu">
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="about.html" class="active">About</a></li>
@@ -81,8 +86,8 @@
                 <div class="footer-section">
                     <h4>Contact</h4>
                     <p>+27 79 920 5195</p>
-                    <p>BENNOKUHN1@ICLOUD.COM</p>
-                    <p>CENTURION</p>
+                    <p>OCKIEBRITS04@GMAIL.COM</p>
+                    <p>CENTURION | JOHANNESBURG</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -96,5 +101,34 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const body = document.body;
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            }
+        });
+    </script>
 </body>
 </html>
