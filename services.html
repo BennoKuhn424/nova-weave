@@ -16,7 +16,12 @@
                     <span class="tagline">DESIGN · STRATEGY · GROWTH</span>
                 </div>
             </div>
-            <ul class="nav-menu">
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html" class="active">Services</a></li>
                 <li><a href="about.html">About</a></li>
@@ -45,28 +50,28 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
+                            <td data-label="Plan">
                                 <div class="plan-name">12-Month Plan</div>
                             </td>
-                            <td>ZAR 300.00</td>
-                            <td>ZAR 3,600.00</td>
-                            <td><span class="plan-tag">Monthly Plan</span></td>
+                            <td data-label="Monthly Payment">ZAR 300.00</td>
+                            <td data-label="Total Cost">ZAR 3,600.00</td>
+                            <td data-label="Type"><span class="plan-tag">Monthly Plan</span></td>
                         </tr>
                         <tr>
-                            <td>
+                            <td data-label="Plan">
                                 <div class="plan-name">24-Month Plan</div>
                             </td>
-                            <td>ZAR 200.00</td>
-                            <td>ZAR 4,800.00</td>
-                            <td><span class="plan-tag">Monthly Plan</span></td>
+                            <td data-label="Monthly Payment">ZAR 200.00</td>
+                            <td data-label="Total Cost">ZAR 4,800.00</td>
+                            <td data-label="Type"><span class="plan-tag">Monthly Plan</span></td>
                         </tr>
                         <tr>
-                            <td>
+                            <td data-label="Plan">
                                 <div class="plan-name">Once-off Plan</div>
                             </td>
-                            <td>ZAR 3,000.00</td>
-                            <td>ZAR 3,000.00</td>
-                            <td><span class="plan-tag">Once-Off</span></td>
+                            <td data-label="Monthly Payment">ZAR 3,000.00</td>
+                            <td data-label="Total Cost">ZAR 3,000.00</td>
+                            <td data-label="Type"><span class="plan-tag">Once-Off</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -86,28 +91,28 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
+                            <td data-label="Plan">
                                 <div class="plan-name">12-Month Plan</div>
                             </td>
-                            <td>ZAR 400.00</td>
-                            <td>ZAR 4,800.00</td>
-                            <td><span class="plan-tag">Monthly Plan</span></td>
+                            <td data-label="Monthly Payment">ZAR 400.00</td>
+                            <td data-label="Total Cost">ZAR 4,800.00</td>
+                            <td data-label="Type"><span class="plan-tag">Monthly Plan</span></td>
                         </tr>
                         <tr>
-                            <td>
+                            <td data-label="Plan">
                                 <div class="plan-name">24-Month Plan</div>
                             </td>
-                            <td>ZAR 220.00</td>
-                            <td>ZAR 5,280.00</td>
-                            <td><span class="plan-tag">Monthly Plan</span></td>
+                            <td data-label="Monthly Payment">ZAR 220.00</td>
+                            <td data-label="Total Cost">ZAR 5,280.00</td>
+                            <td data-label="Type"><span class="plan-tag">Monthly Plan</span></td>
                         </tr>
                         <tr>
-                            <td>
+                            <td data-label="Plan">
                                 <div class="plan-name">Once-off Plan</div>
                             </td>
-                            <td>ZAR 5,000.00</td>
-                            <td>ZAR 5,000.00</td>
-                            <td><span class="plan-tag">Once-Off</span></td>
+                            <td data-label="Monthly Payment">ZAR 5,000.00</td>
+                            <td data-label="Total Cost">ZAR 5,000.00</td>
+                            <td data-label="Type"><span class="plan-tag">Once-Off</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -127,28 +132,28 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
+                            <td data-label="Plan">
                                 <div class="plan-name">12-Month Plan</div>
                             </td>
-                            <td>ZAR 800.00</td>
-                            <td>ZAR 9,600.00</td>
-                            <td><span class="plan-tag">Monthly Plan</span></td>
+                            <td data-label="Monthly Payment">ZAR 800.00</td>
+                            <td data-label="Total Cost">ZAR 9,600.00</td>
+                            <td data-label="Type"><span class="plan-tag">Monthly Plan</span></td>
                         </tr>
                         <tr>
-                            <td>
+                            <td data-label="Plan">
                                 <div class="plan-name">24-Month Plan</div>
                             </td>
-                            <td>ZAR 500.00</td>
-                            <td>ZAR 12,000.00</td>
-                            <td><span class="plan-tag">Monthly Plan</span></td>
+                            <td data-label="Monthly Payment">ZAR 500.00</td>
+                            <td data-label="Total Cost">ZAR 12,000.00</td>
+                            <td data-label="Type"><span class="plan-tag">Monthly Plan</span></td>
                         </tr>
                         <tr>
-                            <td>
+                            <td data-label="Plan">
                                 <div class="plan-name">Once-off Plan</div>
                             </td>
-                            <td>ZAR 10,000.00</td>
-                            <td>ZAR 10,000.00</td>
-                            <td><span class="plan-tag">Once-Off</span></td>
+                            <td data-label="Monthly Payment">ZAR 10,000.00</td>
+                            <td data-label="Total Cost">ZAR 10,000.00</td>
+                            <td data-label="Type"><span class="plan-tag">Once-Off</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -156,7 +161,10 @@
             </div>
 
             <div style="text-align: center; margin-top: 80px;">
-                <a href="contact.html" class="btn btn-primary">Get Started Today</a>
+                <div class="clarification-box fade-in" style="max-width: 800px; margin: 0 auto 40px;">
+                    <p>If you do not understand something and need clarification or explanation about our pricing or services, feel free to contact us. We are here to help you make the best decision for your business.</p>
+                </div>
+                <a href="contact.html" class="btn btn-primary">Get a Free Quote</a>
             </div>
         </div>
     </section>
@@ -176,8 +184,8 @@
                 <div class="footer-section">
                     <h4>Contact</h4>
                     <p>+27 79 920 5195</p>
-                    <p>BENNOKUHN1@ICLOUD.COM</p>
-                    <p>CENTURION</p>
+                    <p>OCKIEBRITS04@GMAIL.COM</p>
+                    <p>CENTURION | JOHANNESBURG</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -191,5 +199,34 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const body = document.body;
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            }
+        });
+    </script>
 </body>
 </html>
