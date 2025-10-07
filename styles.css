@@ -4,6 +4,18 @@
     box-sizing: border-box;
 }
 
+/* Prevent text overflow on mobile */
+h1, h2, h3, h4, h5, h6, p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Make images responsive */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 :root {
     --black: #000000;
     --white: #ffffff;
@@ -17,12 +29,28 @@ body {
     color: var(--white);
     line-height: 1.6;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+/* Better touch targets for mobile */
+a, button, .btn {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
 }
 
 /* Navigation */
@@ -35,6 +63,39 @@ body {
     z-index: 1000;
     border-bottom: 1px solid var(--gray);
     animation: slideDown 0.6s ease-out;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
+/* Hamburger Menu Button - Hidden on Desktop */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 2px;
+    background-color: var(--white);
+    transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
 }
 
 @keyframes slideDown {
@@ -211,15 +272,17 @@ body {
     text-align: center;
     position: relative;
     z-index: 1;
-    padding-top: 100px;
+    padding-top: 120px;
+    padding-bottom: 60px;
 }
 
 .hero h1 {
     font-size: 64px;
     font-weight: 300;
     letter-spacing: 2px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     line-height: 1.2;
+    padding: 0 20px;
 }
 
 .subtitle {
@@ -227,45 +290,90 @@ body {
     color: var(--light-gray);
     margin-bottom: 40px;
     letter-spacing: 1px;
+    padding: 0 20px;
+    line-height: 1.5;
 }
 
 .cta-buttons {
     display: flex;
     gap: 20px;
     justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .btn {
-    padding: 15px 40px;
+    padding: 18px 50px;
     text-decoration: none;
-    font-size: 14px;
-    letter-spacing: 1px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     transition: all 0.3s ease;
-    border: 1px solid var(--white);
+    border: 2px solid var(--white);
     display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 .btn-primary {
     background-color: var(--white);
     color: var(--black);
+    border: 2px solid var(--white);
 }
 
 .btn-primary:hover {
-    background-color: transparent;
+    background-color: var(--black);
     color: var(--white);
     transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
 }
 
 .btn-secondary {
     background-color: transparent;
     color: var(--white);
+    border: 2px solid var(--white);
 }
 
 .btn-secondary:hover {
     background-color: var(--white);
     color: var(--black);
     transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:active {
+    transform: translateY(0);
 }
 
 /* Animations */
@@ -317,15 +425,17 @@ body {
 
 /* Features Section */
 .features {
-    padding: 100px 0;
+    padding: 80px 0;
     position: relative;
     z-index: 1;
+    margin-top: 40px;
 }
 
 .feature-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 40px;
+    margin-top: 20px;
 }
 
 .feature-card {
@@ -364,6 +474,152 @@ body {
     z-index: 1;
 }
 
+.section-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: var(--light-gray);
+    margin-bottom: 60px;
+    letter-spacing: 1px;
+}
+
+/* How We Work Section */
+.how-we-work {
+    padding: 80px 0;
+    position: relative;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.02);
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+    margin-top: 40px;
+}
+
+.process-step {
+    padding: 40px;
+    border: 1px solid var(--gray);
+    transition: all 0.3s ease;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.process-step:hover {
+    border-color: var(--white);
+    transform: translateY(-5px);
+}
+
+.step-number {
+    font-size: 48px;
+    font-weight: 100;
+    margin-bottom: 20px;
+    color: var(--light-gray);
+}
+
+.process-step h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.process-step p {
+    color: var(--light-gray);
+    line-height: 1.8;
+}
+
+.clarification-box {
+    text-align: center;
+    padding: 50px;
+    border: 1px solid var(--white);
+    background-color: rgba(255, 255, 255, 0.03);
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.clarification-box p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: var(--light-gray);
+}
+
+.clarification-box .btn {
+    margin-top: 10px;
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 80px 0;
+    position: relative;
+    z-index: 1;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.testimonial-card {
+    padding: 40px;
+    border: 1px solid var(--gray);
+    transition: all 0.3s ease;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.testimonial-card:hover {
+    border-color: var(--white);
+    transform: translateY(-5px);
+}
+
+.quote-mark {
+    font-size: 80px;
+    font-weight: 100;
+    line-height: 0.5;
+    color: var(--light-gray);
+    margin-bottom: 20px;
+}
+
+.testimonial-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--light-gray);
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.testimonial-author {
+    border-top: 1px solid var(--gray);
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.author-name {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.author-company {
+    font-size: 14px;
+    color: var(--light-gray);
+}
+
+/* Services Preview */
+.services-preview {
+    padding: 100px 0;
+    position: relative;
+    z-index: 1;
+}
+
 .section-title {
     text-align: center;
     font-size: 48px;
@@ -383,6 +639,7 @@ body {
     border: 1px solid var(--gray);
     text-align: center;
     transition: all 0.3s ease;
+    margin-bottom: 20px;
 }
 
 .service-box:hover {
@@ -405,6 +662,7 @@ body {
 .price-tag {
     font-size: 20px;
     margin-bottom: 20px;
+    margin-top: 20px;
     font-weight: 300;
 }
 
@@ -412,17 +670,31 @@ body {
     color: var(--white);
     text-decoration: none;
     letter-spacing: 1px;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     display: inline-block;
+    margin-top: 10px;
+    padding: 12px 30px;
+    border: 2px solid var(--white);
+    font-weight: 500;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .link-arrow:hover {
-    transform: translateX(10px);
+    background-color: var(--white);
+    color: var(--black);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.link-arrow:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
 }
 
 /* Pricing Tables */
 .pricing-section {
-    padding: 150px 0 100px;
+    padding: 140px 0 80px;
     position: relative;
     z-index: 1;
 }
@@ -437,6 +709,7 @@ body {
     letter-spacing: 2px;
     margin-bottom: 40px;
     text-align: center;
+    padding-top: 20px;
 }
 
 .pricing-table {
@@ -465,10 +738,15 @@ body {
 
 .pricing-table tbody tr {
     transition: all 0.3s ease;
+    border-bottom: 1px solid var(--gray);
 }
 
 .pricing-table tbody tr:hover {
     background-color: rgba(255, 255, 255, 0.05);
+}
+
+.pricing-table tbody tr:last-child {
+    border-bottom: none;
 }
 
 .plan-name {
@@ -479,16 +757,18 @@ body {
 
 .plan-tag {
     display: inline-block;
-    padding: 5px 15px;
+    padding: 8px 20px;
     font-size: 11px;
-    letter-spacing: 1px;
-    border: 1px solid var(--white);
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    border: 2px solid var(--white);
     margin-top: 10px;
+    background-color: transparent;
 }
 
 /* About Section */
 .about-section {
-    padding: 150px 0 100px;
+    padding: 140px 0 80px;
     position: relative;
     z-index: 1;
 }
@@ -503,6 +783,7 @@ body {
     font-weight: 300;
     letter-spacing: 2px;
     margin-bottom: 40px;
+    padding-top: 20px;
 }
 
 .about-content p {
@@ -534,7 +815,7 @@ body {
 
 /* Contact Section */
 .contact-section {
-    padding: 150px 0 100px;
+    padding: 140px 0 80px;
     position: relative;
     z-index: 1;
 }
@@ -549,7 +830,8 @@ body {
     font-size: 48px;
     font-weight: 300;
     letter-spacing: 2px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    padding-top: 20px;
 }
 
 .contact-info {
@@ -557,7 +839,8 @@ body {
 }
 
 .contact-item {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    padding: 20px 0;
 }
 
 .contact-label {
@@ -565,22 +848,51 @@ body {
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--light-gray);
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .contact-value {
     font-size: 24px;
     letter-spacing: 1px;
+    line-height: 1.5;
 }
 
 .contact-value a {
     color: var(--white);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 5px 0;
 }
 
 .contact-value a:hover {
     color: var(--light-gray);
+}
+
+/* WhatsApp Button Styling */
+.contact-item:nth-child(2) .contact-value a {
+    padding: 15px 40px;
+    border: 2px solid var(--white);
+    background-color: transparent;
+    font-weight: 600;
+    margin-top: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 16px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+.contact-item:nth-child(2) .contact-value a:hover {
+    background-color: var(--white);
+    color: var(--black);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+.contact-item:nth-child(2) .contact-value a:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
 }
 
 /* Footer */
@@ -590,6 +902,7 @@ body {
     padding: 60px 0 30px;
     position: relative;
     z-index: 1;
+    margin-top: 60px;
 }
 
 .footer-content {
@@ -611,6 +924,7 @@ body {
     color: var(--light-gray);
     margin-bottom: 10px;
     font-size: 14px;
+    line-height: 1.6;
 }
 
 .footer-section a {
@@ -629,46 +943,577 @@ body {
     border-top: 1px solid var(--gray);
     color: var(--light-gray);
     font-size: 12px;
+    margin-top: 20px;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+    .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+    }
+
+    .navbar {
+        padding: 15px 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
     .nav-menu {
-        flex-direction: column;
-        gap: 20px;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
         background-color: var(--black);
-        padding: 20px;
+        flex-direction: column;
+        gap: 0;
+        padding: 100px 30px 30px;
+        transition: right 0.3s ease;
+        border-left: 1px solid var(--gray);
+        z-index: 999;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .nav-menu li {
+        width: 100%;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--gray);
+    }
+
+    .nav-menu li:first-child {
         border-top: 1px solid var(--gray);
+    }
+
+    .nav-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-menu a {
+        padding: 0;
+        display: block;
+        text-align: left;
+        font-size: 16px;
+    }
+
+    .nav-menu a.active {
+        color: var(--white);
+        font-weight: 500;
+    }
+
+    .nav-menu a::after {
         display: none;
     }
 
+    .logo {
+        justify-content: flex-start;
+    }
+
+    .hero {
+        padding-top: 100px;
+        padding-bottom: 40px;
+        min-height: 90vh;
+    }
+
     .hero h1 {
-        font-size: 36px;
+        font-size: 32px;
+        line-height: 1.3;
+        margin-bottom: 25px;
     }
 
     .subtitle {
         font-size: 16px;
+        margin-bottom: 35px;
     }
 
     .cta-buttons {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
+        width: 100%;
+        gap: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 20px 30px;
+        font-size: 14px;
+        font-weight: 600;
+        border: 2px solid var(--white);
     }
 
     .section-title {
-        font-size: 32px;
+        font-size: 28px;
+        line-height: 1.3;
+        margin-bottom: 15px;
+        padding-top: 10px;
+    }
+
+    .section-subtitle {
+        font-size: 16px;
+        margin-bottom: 40px;
+    }
+
+    .features,
+    .how-we-work,
+    .testimonials,
+    .services-preview {
+        padding: 60px 0;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .pricing-section,
+    .about-section,
+    .contact-section {
+        padding: 100px 0 60px;
+    }
+
+    .feature-grid,
+    .services-grid,
+    .process-grid,
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    .feature-card,
+    .feature-card,
+    .service-box,
+    .process-step,
+    .testimonial-card {
+        padding: 30px 20px;
+        margin-bottom: 10px;
+    }
+
+    .service-box h3 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .service-box p {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .price-tag {
+        font-size: 18px;
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+
+    .link-arrow {
+        font-size: 14px;
+        padding: 12px 25px;
+        display: inline-block;
+        margin-top: 10px;
+        width: auto;
+    }
+
+    .feature-number,
+    .step-number {
+        font-size: 36px;
+        margin-bottom: 15px;
+    }
+
+    .feature-card h3,
+    .process-step h3 {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+
+    .feature-card p,
+    .process-step p {
+        font-size: 15px;
+        line-height: 1.7;
     }
 
     .pricing-table {
-        font-size: 14px;
+        font-size: 12px;
+        display: block;
+        overflow-x: auto;
     }
 
-    .pricing-table th,
+    .pricing-table thead {
+        display: none;
+    }
+
+    .pricing-table tbody tr {
+        display: block;
+        margin-bottom: 25px;
+        border: 1px solid var(--white);
+        padding: 25px 20px;
+        background-color: rgba(255, 255, 255, 0.02);
+    }
+
     .pricing-table td {
-        padding: 15px 10px;
+        display: block;
+        padding: 12px 0;
+        border: none;
+        text-align: left;
+    }
+
+    .pricing-table td:not(:last-child) {
+        border-bottom: 1px solid var(--gray);
+    }
+
+    .pricing-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        color: var(--light-gray);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+
+    .plan-name {
+        font-size: 18px;
+        margin-top: 5px;
+    }
+
+    .plan-tag {
+        margin-top: 5px;
+        font-size: 10px;
+        padding: 6px 15px;
+        border: 2px solid var(--white);
+    }
+
+    .category-title {
+        font-size: 26px;
+        padding-top: 10px;
+        margin-bottom: 30px;
+    }
+
+    .pricing-category {
+        margin-bottom: 60px;
+    }
+
+    .about-content h1 {
+        font-size: 32px;
+        padding-top: 10px;
+        margin-bottom: 30px;
+    }
+
+    .about-content p {
+        font-size: 16px;
+        line-height: 1.8;
+        margin-bottom: 25px;
+    }
+
+    .contact-content h1 {
+        font-size: 32px;
+        padding-top: 10px;
+        margin-bottom: 15px;
+    }
+
+    .contact-value {
+        font-size: 18px;
+        word-break: break-word;
+        margin-bottom: 10px;
+    }
+
+    .contact-value a {
+        display: inline-block;
+        padding: 10px 0;
+        min-height: 44px;
+        line-height: 1.5;
+    }
+
+    /* WhatsApp button on mobile */
+    .contact-item:nth-child(2) .contact-value a {
+        padding: 18px 30px;
+        font-size: 14px;
+        width: auto;
+    }
+
+    .contact-item {
+        padding: 25px 0;
+        margin-bottom: 30px;
+        border-bottom: 1px solid var(--gray);
+    }
+
+    .contact-item:last-child {
+        border-bottom: none;
+    }
+
+    .contact-label {
+        margin-bottom: 12px;
+    }
+
+    .clarification-box {
+        padding: 30px 20px;
+        margin-top: 40px;
+        margin-bottom: 30px;
+    }
+
+    .clarification-box p {
+        font-size: 16px;
+        line-height: 1.7;
+        margin-bottom: 25px;
+    }
+
+    .quote-mark {
+        font-size: 60px;
+        margin-bottom: 15px;
+    }
+
+    .testimonial-text {
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 25px;
+    }
+
+    .testimonial-card {
+        padding: 30px 20px;
+    }
+
+    .testimonial-author {
+        padding-top: 15px;
+        margin-top: 15px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .footer-section .logo {
+        justify-content: center;
+    }
+
+    .logo-text {
+        text-align: center;
+    }
+
+    .footer-section p {
+        margin-bottom: 12px;
+    }
+
+    .footer-section h4 {
+        margin-bottom: 15px;
+        margin-top: 10px;
+    }
+
+    .footer-bottom {
+        font-size: 11px;
+        padding-top: 20px;
+        margin-top: 20px;
+    }
+
+    .footer {
+        padding: 50px 0 25px;
+    }
+
+    .curve-decoration {
+        display: none;
+    }
+
+    .container {
+        padding: 0 20px;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    /* Ensure proper spacing between all elements */
+    section {
+        clear: both;
+    }
+}
+
+/* Extra small devices (phones in portrait, less than 576px) */
+@media (max-width: 576px) {
+    .navbar {
+        padding: 12px 0;
+    }
+
+    .nav-container {
+        padding: 8px 15px;
+    }
+
+    .hero {
+        padding-top: 160px;
+        padding-bottom: 30px;
+    }
+    .hero h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .subtitle {
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+    .section-title {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+        font-size: 15px;
+        margin-bottom: 35px;
+    }
+
+    .btn {
+        padding: 18px 25px;
+        font-size: 13px;
+        font-weight: 600;
+        border: 2px solid var(--white);
+    }
+
+    .features,
+    .how-we-work,
+    .testimonials,
+    .services-preview {
+        padding: 50px 0;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    .pricing-section,
+    .about-section,
+    .contact-section {
+        padding: 110px 0 50px;
+    }
+
+    .feature-card,
+    .service-box,
+    .process-step,
+    .testimonial-card {
+        padding: 25px 15px;
+        margin-bottom: 8px;
+    }
+
+    .feature-number,
+    .step-number {
+        font-size: 32px;
+        margin-bottom: 12px;
+    }
+
+    .feature-card h3,
+    .service-box h3,
+    .process-step h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .feature-card p,
+    .service-box p,
+    .process-step p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .logo-box {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .brand-name {
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+
+    .tagline {
+        font-size: 8px;
+        letter-spacing: 1.5px;
+    }
+
+    .nav-menu a {
+        font-size: 13px;
+        padding: 6px 0;
+    }
+
+    .contact-value {
+        font-size: 16px;
+    }
+
+    .contact-value a {
+        padding: 8px 0;
+    }
+
+    /* WhatsApp button on small mobile */
+    .contact-item:nth-child(2) .contact-value a {
+        padding: 16px 25px;
+        font-size: 13px;
+    }
+
+    .contact-label {
+        font-size: 11px;
+        margin-bottom: 10px;
+    }
+
+    .contact-item {
+        padding: 20px 0;
+        margin-bottom: 25px;
+    }
+
+    .clarification-box {
+        padding: 25px 15px;
+        margin-top: 35px;
+        margin-bottom: 25px;
+    }
+
+    .clarification-box p {
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .category-title {
+        font-size: 22px;
+        margin-bottom: 25px;
+    }
+
+    .pricing-category {
+        margin-bottom: 50px;
+    }
+
+    .plan-name {
+        font-size: 16px;
+    }
+
+    .about-content h1,
+    .contact-content h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .about-content p {
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .cta-buttons {
+        gap: 12px;
+    }
+
+    .process-grid,
+    .feature-grid,
+    .services-grid,
+    .testimonial-grid {
+        gap: 25px;
+        margin-top: 25px;
     }
 }
